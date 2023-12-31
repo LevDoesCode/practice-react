@@ -1,8 +1,6 @@
 import "./ExpenseItem.css";
 
 function ExpenseItem(props) {
-    console.log(props);
-
     return (
         <div className="expense-item">
             <div>{props.date.toISOString()}</div>
