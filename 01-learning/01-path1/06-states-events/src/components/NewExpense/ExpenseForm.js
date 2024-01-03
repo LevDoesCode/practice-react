@@ -1,7 +1,7 @@
 import "./ExpenseForm.css";
 import { useState } from "react";
 
-const ExpenseForm = () => {
+const ExpenseForm = (props) => {
     const [enteredTitle, setEnteredTitle] = useState("");
     const [enteredAmount, setEnteredAmount] = useState("");
     const [enteredDate, setEnteredDate] = useState("2024-01-01");
@@ -20,7 +20,7 @@ const ExpenseForm = () => {
 
     const sumbitHandler = (event) => {
         event.preventDefault();
-        console.log(enteredDate);
+
         const expenseData = {
             title: enteredTitle,
             amount: enteredAmount,
@@ -30,7 +30,8 @@ const ExpenseForm = () => {
         setEnteredTitle("");
         setEnteredAmount("");
         setEnteredDate("2024-01-01");
-        console.log(expenseData);
+
+        props.onSaveExpenseData(expenseData);
     };
 
     return (
