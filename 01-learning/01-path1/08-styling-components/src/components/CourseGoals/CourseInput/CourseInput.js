@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import Button from "../../UI/Button/Button";
 import "./CourseInput.css";
@@ -8,6 +8,11 @@ const CourseInput = (props) => {
     const [isValid, setIsValid] = useState(true);
 
     const inputRef = useRef();
+
+    // Focus an input element when the component is rendered (mounted)
+    useEffect(() => {
+        inputRef.current.focus();
+    }, []); // Empty dependency array ensures this effect runs once after the initial render
 
     const goalInputChangeHandler = (event) => {
         if (event.target.value.trim().length > 0) {
@@ -30,15 +35,9 @@ const CourseInput = (props) => {
 
     return (
         <form onSubmit={formSubmitHandler}>
-            <div className="form-control">
-                <label style={{ color: isValid ? "black" : "red" }}>Course Goal</label>
-                <input
-                    style={{ backgroundColor: isValid ? "white" : "pink", borderColor: isValid ? "initial" : "red" }}
-                    type="text"
-                    value={enteredValue}
-                    ref={inputRef}
-                    onChange={goalInputChangeHandler}
-                />
+            <div className={`form-control ${isValid ? "" : "invalid_input"}`}>
+                <label>Course Goal</label>
+                <input type="text" value={enteredValue} ref={inputRef} onChange={goalInputChangeHandler} />
             </div>
             <Button type="submit">Add Goal</Button>
         </form>
