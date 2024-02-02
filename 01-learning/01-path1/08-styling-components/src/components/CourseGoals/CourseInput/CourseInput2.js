@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 
-import Button from "../../UI/Button/Button2";
+import Button from "../../UI/Button/Button3";
 import "./CourseInput.css";
 
 const FormControl = styled.div`
