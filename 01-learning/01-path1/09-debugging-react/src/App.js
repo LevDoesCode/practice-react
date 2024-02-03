@@ -10,10 +10,13 @@ const App = () => {
         { text: "Finish the course!", id: "g2" },
     ]);
 
+    const [lastID, setLastID] = useState(2);
+
     const addGoalHandler = (enteredText) => {
         setCourseGoals((prevGoals) => {
             const updatedGoals = [...prevGoals];
-            updatedGoals.unshift({ text: enteredText, id: "goal1" });
+            updatedGoals.unshift({ text: enteredText, id: `g${lastID + 1}` });
+            setLastID((prevID) => prevID + 1);
             return updatedGoals;
         });
     };
