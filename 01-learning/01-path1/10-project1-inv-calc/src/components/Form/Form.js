@@ -7,17 +7,14 @@ const startUserInput = {
     duration: 0,
 };
 
-const Form = () => {
+const Form = (props) => {
     const [userInput, setUserInput] = useState({ startUserInput });
-
-    // setUserInput((prevState) => {
-    //     return {
-    //         ...prevState,
 
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(userInput);
         console.log("Form submitted");
+        props.onCalculate(userInput);
     };
 
     const handleReset = (event) => {
