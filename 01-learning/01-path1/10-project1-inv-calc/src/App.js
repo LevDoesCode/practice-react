@@ -38,7 +38,7 @@ function App() {
         <div>
             <Header />
             <Form onCalculate={handleCalculate} />
-            {!inputState && <p>Please enter the details to calculate the investment</p>}
+            {!inputState && <p style={{ textAlign: "center" }}>Please enter the details to calculate the investment</p>}
             {inputState && <Table data={inputState} />}
             {/* Todo: Show below table conditionally (only once result data is available) */}
             {/* Show fallback text if no data is available */}
