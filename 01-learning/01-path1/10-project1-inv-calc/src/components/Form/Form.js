@@ -1,19 +1,17 @@
 import { useState } from "react";
 
 const startUserInput = {
-    "current-savings": 0,
-    "yearly-contribution": 0,
-    "expected-return": 0,
-    duration: 0,
+    "current-savings": 10000,
+    "yearly-contribution": 1200,
+    "expected-return": 7,
+    duration: 10,
 };
 
 const Form = (props) => {
-    const [userInput, setUserInput] = useState({ startUserInput });
+    const [userInput, setUserInput] = useState(startUserInput);
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(userInput);
-        console.log("Form submitted");
         props.onCalculate(userInput);
     };
 
