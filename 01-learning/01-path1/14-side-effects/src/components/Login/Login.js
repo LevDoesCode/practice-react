@@ -12,6 +12,36 @@ const Login = (props) => {
     const [formIsValid, setFormIsValid] = useState(false);
 
     useEffect(() => {
+        console.log("EFFECT RUNNING - Every component render");
+    });
+
+    useEffect(() => {
+        console.log("EFFECT RUNNING - Only first render");
+    }, []);
+
+    useEffect(() => {
+        console.log("EFFECT RUNNING - When dependencies change");
+    }, [enteredPassword]);
+
+    useEffect(() => {
+        console.log("EFFECT RUNNING - When dependencies change");
+
+        // Clean up only after the first render and when the depenencies are removed
+        return () => {
+            console.log("EFFECT CLEANUP - When dependencies change");
+        };
+    }, [enteredPassword]);
+
+    useEffect(() => {
+        console.log("EFFECT RUNNING - Only first render");
+
+        // Clean up only after the first render and when the depenencies are removed
+        return () => {
+            console.log("EFFECT CLEANUP - When removed from the DOM");
+        };
+    }, []);
+
+    useEffect(() => {
         // Debouncing - to avoid unnecessary checks
         const loginButtonSetter = setTimeout(() => {
             console.log("Checking form validity!");
