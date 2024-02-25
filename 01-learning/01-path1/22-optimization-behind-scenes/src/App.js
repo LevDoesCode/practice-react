@@ -7,16 +7,25 @@ import "./App.css";
 
 function App() {
     const [showParagraph, setShowParagraph] = useState(false);
+    const [allowToggle, setAllowToggle] = useState(false);
+
     console.log("App running");
 
     const handleToggleParagraph = useCallback(() => {
-        setShowParagraph((prevShowParagraph) => !prevShowParagraph);
-    }, []);
+        if (allowToggle) {
+            setShowParagraph((prevShowParagraph) => !prevShowParagraph);
+        }
+    }, [allowToggle]);
+
+    const handleAllowToggle = () => {
+        setAllowToggle(!allowToggle);
+    };
 
     return (
         <div className="app">
             <h1>Hi there!</h1>
-            <DemoOutput show={false} />
+            <DemoOutput show={showParagraph} />
+            <Button onClick={handleAllowToggle}>Allow Toggle</Button>
             <Button onClick={handleToggleParagraph}>Toggle Paragraph!</Button>
         </div>
     );
