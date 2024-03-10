@@ -1,5 +1,5 @@
 import { CORE_CONCEPTS as coreData } from "./data";
-import Header from "./components/Header";
+import Header from "./components/Header/Header";
 import CoreConcept from "./components/CoreConcept";
 import CoreConceptv2 from "./components/CoreConceptv2";
 
