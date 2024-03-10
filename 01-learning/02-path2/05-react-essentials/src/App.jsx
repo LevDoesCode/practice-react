@@ -1,12 +1,13 @@
+import { useState } from "react";
 import { CORE_CONCEPTS as coreData } from "./data";
 import Header from "./components/Header/Header";
 import CoreConcept from "./components/CoreConcept";
 import CoreConceptv2 from "./components/CoreConceptv2";
 import TabButton from "./components/TabButton";
-import { useState } from "react";
+import { EXAMPLES } from "./data";
 
 function App() {
-    const [selectedTopic, setSelectTopic] = useState("Click on a tab");
+    const [selectedTopic, setSelectTopic] = useState("components");
 
     function handleTabClick(selectedTab) {
         setSelectTopic(selectedTab);
@@ -56,7 +57,13 @@ function App() {
                         <TabButton onClick={() => handleTabClick("props")}>Props</TabButton>
                         <TabButton onClick={() => handleTabClick("state")}>State</TabButton>
                     </menu>
-                    {selectedTopic}
+                    <div id="tab-content">
+                        <h3>{EXAMPLES[selectedTopic].title}</h3>
+                        <p>{EXAMPLES[selectedTopic].description}</p>
+                        <pre>
+                            <code>{EXAMPLES[selectedTopic].code}</code>
+                        </pre>
+                    </div>
                 </section>
                 <h2>Time to get started!</h2>
             </main>
