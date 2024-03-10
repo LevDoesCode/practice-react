@@ -2,6 +2,7 @@ import { CORE_CONCEPTS as coreData } from "./data";
 import Header from "./components/Header/Header";
 import CoreConcept from "./components/CoreConcept";
 import CoreConceptv2 from "./components/CoreConceptv2";
+import TabButton from "./components/TabButton";
 
 function App() {
     return (
@@ -39,6 +40,12 @@ function App() {
                         <CoreConcept {...coreData[2]} />
                         <CoreConceptv2 {...coreData[3]} />
                     </ul>
+                </section>
+                <section id="examples">
+                    <h2>Example</h2>
+                    <menu>
+                        <TabButton>Components</TabButton>
+                    </menu>
                 </section>
                 <h2>Time to get started!</h2>
             </main>
