@@ -5,6 +5,10 @@ import CoreConceptv2 from "./components/CoreConceptv2";
 import TabButton from "./components/TabButton";
 
 function App() {
+    function handleTabClick() {
+        console.log("Tab clicked");
+    }
+
     return (
         <div>
             <Header />
@@ -44,10 +48,10 @@ function App() {
                 <section id="examples">
                     <h2>Example</h2>
                     <menu>
-                        <TabButton>Components</TabButton>
-                        <TabButton>JSX</TabButton>
-                        <TabButton>Props</TabButton>
-                        <TabButton>State</TabButton>
+                        <TabButton onClick={handleTabClick}>Components</TabButton>
+                        <TabButton onClick={handleTabClick}>JSX</TabButton>
+                        <TabButton onClick={handleTabClick}>Props</TabButton>
+                        <TabButton onClick={handleTabClick}>State</TabButton>
                     </menu>
                 </section>
                 <h2>Time to get started!</h2>
