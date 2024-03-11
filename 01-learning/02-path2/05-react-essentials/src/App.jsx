@@ -62,6 +62,11 @@ function App() {
                         <CoreConcept {...coreData[2]} />
                         <CoreConceptv2 {...coreData[3]} />
                     </ul>
+                    <ul>
+                        {coreData.map((core) => (
+                            <CoreConcept key={core.title} {...core} />
+                        ))}
+                    </ul>
                 </section>
                 <section id="examples">
                     <h2>Example</h2>
