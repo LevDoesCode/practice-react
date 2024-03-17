@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 export default function Player({ initialName, symbol }) {
     const [isEditing, setIsEditing] = useState(false);
@@ -6,20 +6,12 @@ export default function Player({ initialName, symbol }) {
 
     const inputRef = useRef(null);
 
-    function handleEditClick() {
-        setIsEditing((prevState) => !prevState);
-        if (isEditing) {
+    useEffect(() => {
+        if (isEditing && inputRef.current) {
             inputRef.current.focus();
+            inputRef.current.select();
         }
-    }
-
-    function handleInputChange(event) {
-        setPlayerName(event.target.value);
-    }
-
-    function handleFocus(event) {
-        event.target.select();
-    }
+    }, [isEditing]);
 
     let playerBox = <span className="player-name">{playerName}</span>;
     let btnCaption = "Edit";
@@ -27,6 +19,14 @@ export default function Player({ initialName, symbol }) {
     if (isEditing) {
         playerBox = <input type="text" required value={playerName} onChange={handleInputChange} ref={inputRef} />;
         btnCaption = "Save";
+    }
+
+    function handleEditClick() {
+        setIsEditing((prevState) => !prevState);
+    }
+
+    function handleInputChange(event) {
+        setPlayerName(event.target.value);
     }
 
     return (
