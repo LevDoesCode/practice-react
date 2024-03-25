@@ -1,7 +1,9 @@
+import Header from "./components/Header";
+
+const title = "Investment Calculator";
+
 function App() {
-  return (
-    <h1>React Investment Calculator</h1>
-  )
+    return <Header title={title} />;
 }
 
-export default App
+export default App;
