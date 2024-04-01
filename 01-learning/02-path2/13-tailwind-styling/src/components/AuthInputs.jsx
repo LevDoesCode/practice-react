@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { styled } from "styled-components";
 import AuthInput from "./Input";
+import Button from "./Button";
 
 const ControlsContainer = styled.div`
     display: flex;
@@ -54,7 +55,7 @@ const Input2 = styled.input`
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 `;
 
-const Button = styled.button`
+const Buttonx = styled.button`
     padding: 1rem 2rem;
     font-weight: 600;
     text-transform: uppercase;
@@ -124,8 +125,9 @@ export default function AuthInputs() {
                 <button type="button" className="text-button">
                     Create a new account
                 </button>
-                <Button onClick={handleLogin}>Sign In</Button>
+                <Buttonx onClick={handleLogin}>Sign In</Buttonx>
             </div>
+            <Button>Login</Button>
         </div>
     );
 }
