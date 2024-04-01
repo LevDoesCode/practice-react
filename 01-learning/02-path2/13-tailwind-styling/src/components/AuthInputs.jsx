@@ -92,7 +92,10 @@ export default function AuthInputs() {
     const passwordNotValid = submitted && enteredPassword.trim().length < 6;
 
     return (
-        <div id="auth-inputs">
+        <div
+            id="auth-inputs"
+            className="w-full max-w-sm p-8 mx-auto rounded shadow-md bg-gradient-to-b from-stone-500 to-stone-800"
+        >
             <ControlsContainer>
                 <p>
                     <Label2 $invalid={emailNotValid}>Email</Label2>
@@ -128,13 +131,36 @@ export default function AuthInputs() {
                     onChange={(event) => handleInputChange("email", event.target.value)}
                 />
             </ControlsContainer>
+
             <div className="actions">
                 <button type="button" className="text-button">
                     Create a new account
                 </button>
                 <Buttonx onClick={handleLogin}>Sign In</Buttonx>
             </div>
-            <Button>Login</Button>
+
+            {/* Tailwind below */}
+            <p style={{ color: "white", fontSize: "2rem" }}>Tailwind Below</p>
+            <div className="flex flex-col gap-2 mb-6">
+                <AuthInput2
+                    invalid={emailNotValid}
+                    label="Email"
+                    type="email"
+                    onChange={(event) => handleInputChange("email", event.target.value)}
+                />
+                <AuthInput2
+                    invalid={emailNotValid}
+                    label="Password"
+                    type="password"
+                    onChange={(event) => handleInputChange("password", event.target.value)}
+                />
+            </div>
+            <div className="flex justify-end gap-8">
+                <button type="button" className="text-amber-400 hover:text-amber-200">
+                    Create a new account
+                </button>
+                <Button onClick={handleLogin}>Login</Button>
+            </div>
         </div>
     );
 }
