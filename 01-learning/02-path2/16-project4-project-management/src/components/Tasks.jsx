@@ -16,7 +16,10 @@ export default function Tasks({ tasks, selectedProjectId, onAdd, onDelete }) {
                                     className="flex justify-between my-4"
                                 >
                                     <span>{task.text}</span>
-                                    <button className="bg-stone-300 text-stone-700 hover:text-red-500 px-2 py-1 rounded-md">
+                                    <button
+                                        className="bg-stone-300 text-stone-700 hover:text-red-500 px-2 py-1 rounded-md"
+                                        onClick={() => onDelete(task.id)}
+                                    >
                                         Clear
                                     </button>
                                 </li>
