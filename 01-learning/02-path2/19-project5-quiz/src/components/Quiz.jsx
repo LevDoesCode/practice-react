@@ -1,70 +1,46 @@
-import { useCallback, useState } from "react";
-import questions from "../questions";
+import { useState, useCallback } from "react";
+
+import QUESTIONS from "../questions.js";
+import QuestionTimer from "./QuestionTimer.jsx";
 import quizCompleteImg from "../assets/quiz-complete.png";
-import QuestionTimer from "./QuestionTImer";
 
 export default function Quiz() {
     const [userAnswers, setUserAnswers] = useState([]);
-    const [answerState, setAnswerState] = useState("");
 
-    const activeQuestionIndex = answerState === "" ? userAnswers.length : userAnswers.length - 1;
+    const activeQuestionIndex = userAnswers.length;
+    const quizIsComplete = activeQuestionIndex === QUESTIONS.length;
 
-    if (activeQuestionIndex === questions.length) {
+    const handleSelectAnswer = useCallback(function handleSelectAnswer(selectedAnswer) {
+        setUserAnswers((prevUserAnswers) => {
+            return [...prevUserAnswers, selectedAnswer];
+        });
+    }, []);
+
+    const handleSkipAnswer = useCallback(() => handleSelectAnswer(null), [handleSelectAnswer]);
+
+    if (quizIsComplete) {
         return (
             <div id="summary">
-                <img src={quizCompleteImg} alt="Quiz Complete" />
-                <h2>Quiz Complete</h2>
+                <img src={quizCompleteImg} alt="Trophy icon" />
+                <h2>Quiz Completed!</h2>
             </div>
         );
     }
 
-    const shuffledAnswers = [...questions[activeQuestionIndex].answers].sort(() => Math.random() - 0.5);
-
-    const handleSelectAnswer = useCallback(
-        function handleSelectAnswer(selectedAnswer) {
-            // setUserAnswers([...userAnswers, selectedAnswer]);
-            setAnswerState("answered");
-            setUserAnswers((prevAnswers) => [...prevAnswers, selectedAnswer]);
-            setTimeout(() => {
-                if (selectedAnswer === questions[activeQuestionIndex].answers[0]) {
-                    setAnswerState("correct");
-                } else {
-                    setAnswerState("wrong");
-                }
-                setTimeout(() => {
-                    setAnswerState("");
-                }, 2000);
-                console.log(answerState);
-            }, 1000);
-        },
-        [activeQuestionIndex]
-    );
-
-    const handleSkipAnswer = useCallback(() => handleSelectAnswer(null), [handleSelectAnswer]);
+    const shuffledAnswers = [...QUESTIONS[activeQuestionIndex].answers];
+    shuffledAnswers.sort(() => Math.random() - 0.5);
 
     return (
         <div id="quiz">
             <div id="question">
-                <QuestionTimer key={activeQuestionIndex} timeout={5000} onTimeout={handleSkipAnswer} />
-                <h2>{questions[activeQuestionIndex].text}</h2>
+                <QuestionTimer key={activeQuestionIndex} timeout={3000} onTimeout={handleSkipAnswer} />
+                <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
                 <ul id="answers">
-                    {shuffledAnswers.map((answer, index) => {
-                        const isSlected = userAnswers[userAnswers.length - 1] === answer;
-                        let cssClass = "";
-                        if (answerState === "answered" && isSlected) {
-                            cssClass = "selected";
-                        }
-                        if ((answerState === "correct" || answerState === "wrong") && isSlected) {
-                            cssClass = "wrong";
-                        }
-                        return (
-                            <li key={index} className="answer">
-                                <button onClick={() => handleSelectAnswer(answer)} className={cssClass}>
-                                    {answer}
-                                </button>
-                            </li>
-                        );
-                    })}
+                    {shuffledAnswers.map((answer) => (
+                        <li key={answer} className="answer">
+                            <button onClick={() => handleSelectAnswer(answer)}>{answer}</button>
+                        </li>
+                    ))}
                 </ul>
             </div>
         </div>
